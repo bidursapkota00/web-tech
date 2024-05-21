@@ -1,28 +1,52 @@
 <html>
   <head>
-    <title>Canvas</title>
+    <title>Form</title>
   </head>
   <body>
-    <canvas id="mycanvas" width="500px" height="500px"></canvas>
-    <script>
-      const canvas = document.getElementById("mycanvas");
-      const ctx = canvas.getContext("2d");
+    <form
+      action="/html/index.html"
+      target="_blank"
+      enctype="application/x-www-form-urlencoded"
+    >
+      <fieldset>
+        <legend>Personal Details</legend>
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          maxlength="5"
+          autofocus
+        /><br /><br />
 
-      ctx.fillStyle = "red";
-      ctx.strokeStyle = "blue";
-      ctx.lineWidth = 2;
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="jondoe@gmail.com"
+        /><br /><br />
 
-      ctx.fillRect(5, 5, 100, 50);
-      ctx.strokeRect(5, 5, 100, 50);
+        <label for="message"></label>
+        <textarea
+          name="message"
+          id="message"
+          rows="4"
+          style="resize: vertical"
+        ></textarea>
+      </fieldset>
+      <br /><br />
+      <fieldset>
+        <legend>Additional Information</legend>
+        <label for="">Mothers Name</label>
+        <input type="text" /><br /><br />
 
-      ctx.moveTo(5, 200);
-      ctx.lineTo(200, 300);
-      ctx.stroke();
+        <label for="">Fathers Name</label>
+        <input type="text" />
+      </fieldset>
 
-      ctx.beginPath();
-      ctx.arc(200, 200, 50, 0, 360);
-      ctx.fill();
-      ctx.stroke();
-    </script>
+      <button type="submit">Submit</button>
+    </form>
   </body>
 </html>
