@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Js</title>
+    <title>Js Introduction</title>
     <style>
       .green {
         color: green !important;
@@ -21,5 +21,16 @@
     <button onclick="document.getElementById('text').className = 'green'">
       Click Me to change class attributes
     </button>
+    <button onclick="console.log('Clicked')">
+      Click Me to print to console
+    </button>
+    <button onclick="printToConsole()">Click Me to print to console</button>
+    <script>
+      function printToConsole() {
+        console.log("Clicked");
+      }
+
+      console.log(1 + 1);
+    </script>
   </body>
 </html>

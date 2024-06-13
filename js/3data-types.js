@@ -36,6 +36,9 @@ const employee = {
 };
 
 console.log(Object.keys(employee));
+console.log(employee.name);
+console.log(employee["name"]);
+console.log(employee[email]);
 
 for (let key in employee) {
   console.log(employee[key]);
@@ -53,12 +56,12 @@ let person = {
   name: "John",
   age: 30,
 };
-person;
+console.log(person);
 
 // Array
 // A special type of object used for storing ordered collections.
-let numbers = [1, 2, 3, 4, 5, "s", 1.2];
-console.log(numbers);
+let arr = [1, 2, 3, 4, 5, "s", 1.2];
+console.log(arr);
 
 // Function
 // Also an object, represents a block of code designed to perform a particular task.
@@ -90,7 +93,6 @@ function Person(name, age) {
 }
 
 const john = new Person("John", 30);
-console.log(john.name);
 console.log(john.name);
 console.log(john);
 console.log(john.greet());
