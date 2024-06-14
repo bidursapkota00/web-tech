@@ -51,3 +51,20 @@ function Employee(name) {
 
 const person = new Employee("Ram");
 console.log(person);
+
+sayHello("Alice");
+// sayHi("Alice");
+// sayHi2("Alice");
+function sayHello(name) {
+  console.log("Hello, " + name + "!");
+}
+
+const sayHi = function (name) {
+  console.log("Hello, " + name + "!");
+};
+sayHi("Alice");
+
+const sayHi2 = (name) => {
+  console.log("Hello, " + name + "!");
+};
+sayHi2("Alice");
