@@ -63,6 +63,13 @@ const add2 = (...args) => args[0] + args[1] + args[2];
 console.log(add2(1, 2, 3));
 console.log(add2(...numbers));
 
+function add3(...args) {
+  return arguments[0] + arguments[1] + arguments[2];
+  // return args[0] + args[1] + args[2];
+}
+console.log(add3(1, 2, 3));
+console.log(add3(...numbers));
+
 const str = "hello";
 const chars = [...str];
 console.log(chars); // ['h', 'e', 'l', 'l', 'o']

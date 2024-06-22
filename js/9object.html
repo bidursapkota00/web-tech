@@ -25,7 +25,8 @@
       console.log(person.isAlive);
       delete person.isAlive;
       console.log(person.isAlive);
-      person.kill(console.log(person));
+      person.kill();
+      console.log(person);
 
       function Person(name, age) {
         this.name = name;

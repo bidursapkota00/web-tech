@@ -30,6 +30,21 @@ const obj = {
 
 obj.arrowFunction(); // logs `undefined`
 
+function OuterContext() {
+  this.value = 20;
+
+  const obj = {
+    value: 10,
+    arrowFunction: () => {
+      console.log(this.value); // `this` refers to `OuterContext`'s `this`
+    },
+  };
+
+  obj.arrowFunction(); // Output: 20
+}
+
+new OuterContext();
+
 // Normal function have arguments object
 // that contains all the arguments passed to the function
 function normalFunction() {

@@ -98,6 +98,9 @@ console.log(john);
 console.log(john.greet());
 
 class Person2 {
+  name;
+  age;
+
   constructor(name, age) {
     this.name = name;
     this.age = age;

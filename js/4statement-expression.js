@@ -75,7 +75,12 @@ try {
   let result = riskyOperation();
   console.log(result);
 } catch (error) {
-  console.log("An error occurred");
+  console.log("An error occurred", error);
+  if (error instanceof ReferenceError) {
+    throw new Error("Reference Error");
+  }
+} finally {
+  console.log("This will always run");
 }
 
 // Object and Array Initializer Expressions
