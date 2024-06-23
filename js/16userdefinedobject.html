@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>User Defined Object</title>
+  </head>
+  <body>
+    <script>
+      function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.isAlive = true;
+      }
+      Person.prototype.kill = function () {
+        this.isAlive = false;
+      };
+
+      const perosn1 = new Person("Bidur", 24);
+      console.log(perosn1.name, perosn1.isAlive);
+      perosn1.kill();
+      console.log(perosn1.name, perosn1.isAlive);
+
+      const person2 = {
+        name: "Bidur",
+        age: 24,
+        isAlive: true,
+        kill: function () {
+          this.isAlive = false;
+        },
+      };
+      console.log(person2.name, person2.isAlive);
+      person2.kill();
+      console.log(person2.name, person2.isAlive);
+    </script>
+  </body>
+</html>

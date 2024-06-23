@@ -128,3 +128,5 @@ console.log(lookahead.match(/\d+(?= dollars)/)); // Matches ["100"]
 // Negative lookahead
 const strNegLook = "123abc456";
 console.log(strNegLook.match(/\d{3,}(?!abc)/));
+
+// regexr.com
