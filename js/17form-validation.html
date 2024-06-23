@@ -11,41 +11,60 @@
       .error {
         color: red;
         font-size: 14px;
+        margin: 0;
+      }
+      .input_container {
+        position: relative;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+      }
+      .error {
+        position: absolute;
+        bottom: 0;
+        left: 0;
       }
     </style>
   </head>
   <body>
     <form action="/js/17form-validation.html" onsubmit="return validate();">
-      <label for="name">Name: </label>
-      <input type="text" id="name" name="name" placeholder="John Doe" />
-      <p class="error" id="name_error">&nbsp;</p>
+      <div class="input_container">
+        <label for="name">Name: </label>
+        <input type="text" id="name" name="name" placeholder="John Doe" />
+        <p class="error" id="name_error"></p>
+      </div>
 
-      <label for="username">Username</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        placeholder="john-doe-123"
-      />
-      <p class="error" id="username_error">&nbsp;</p>
+      <div class="input_container">
+        <label for="username">Username: </label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="john-doe-123"
+        />
+        <p class="error" id="username_error"></p>
+      </div>
 
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="johndoe@email.com"
-      />
-      <p class="error" id="email_error">&nbsp;</p>
+      <div class="input_container">
+        <label for="email">Email: </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="johndoe@email.com"
+        />
+        <p class="error" id="email_error"></p>
+      </div>
 
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="********"
-      />
-      <p class="error" id="password_error">&nbsp;</p>
+      <div class="input_container">
+        <label for="password">Password: </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="********"
+        />
+        <p class="error" id="password_error"></p>
+      </div>
 
       <button type="submit">Submit</button>
     </form>
@@ -64,36 +83,52 @@
         const email = email_tag.value.trim();
         const password = password_tag.value.trim();
 
-        let isErrorDetected = false;
+        let errorBit = 0b0000;
 
-        if (!name || !username || !email || !password) {
-          if (!name) showError("name", "Name is required!");
-          if (!username) showError("username", "Username is required!");
-          if (!email) showError("email", "Email is required");
-          if (!password) showError("password", "Password is required");
-
-          return false;
+        if (!name) {
+          errorBit = errorBit | 0b1000;
+          showError("name", "Name is required!");
+        }
+        if (!username) {
+          errorBit = errorBit | 0b0100;
+          showError("username", "Username is required!");
+        }
+        if (!email) {
+          errorBit = errorBit | 0b0010;
+          showError("email", "Email is required");
+        }
+        if (!password) {
+          errorBit = errorBit | 0b0001;
+          showError("password", "Password is required");
         }
 
-        if (!/\w/.test(name)) {
+        if (!(errorBit & 0b1000) && !/^[a-zA-Z]+(?: [a-zA-Z]+)+$/.test(name)) {
           showError("name", "Name is Invalid!");
-          isErrorDetected = true;
+          errorBit = errorBit | 0b1000;
         }
-        if (!/\w|-/.test(username)) {
+        if (!(errorBit & 0b0100) && !/^[a-zA-Z][a-zA-Z0-9-]+$/.test(username)) {
           showError("username", "Username is Invalid!");
-          isErrorDetected = true;
+          errorBit = errorBit | 0b0100;
         }
 
-        if (!/\w{2,}|@\w{2,}.\w{2,}/.test(email)) {
+        if (
+          !(errorBit & 0b0010) &&
+          !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
+        ) {
           showError("email", "Email is Invalid");
-          isErrorDetected = true;
+          errorBit = errorBit | 0b0010;
         }
-        if (!/\w{8,}/.test(password)) {
+        if (
+          !(errorBit & 0b0001) &&
+          !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/.test(
+            password
+          )
+        ) {
           showError("password", "Password is Invalid");
-          isErrorDetected = true;
+          errorBit = errorBit | 0b0001;
         }
 
-        if (isErrorDetected) return false;
+        if (errorBit) return false;
 
         return true;
       }
@@ -122,7 +157,6 @@
         }
       }
 
-      function resetError(errorTag) {}
       function resetError() {
         const errorTags = document.querySelectorAll(".error");
         for (const errorTag of errorTags) {

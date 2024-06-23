@@ -118,7 +118,7 @@ console.log(str2.match(regex));
 // Non-capturing group
 let nonCapturing = "redapple";
 console.log(nonCapturing.match(/(?:red)apple/)); // Matches ["redapple"]
-console.log(nonCapturing.match(/(red)apple/)); // Matches ["redapple"]
+console.log(nonCapturing.match(/(red)apple/)); // Matches ["redapple", "red"]
 
 // Positive lookahead
 let lookahead = "I have 100 dollars.";
