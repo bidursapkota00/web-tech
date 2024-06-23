@@ -58,33 +58,12 @@ console.log(specialChars.match(/\t/)); // Matches ["\t"]
 console.log(specialChars.match(/\n/)); // Matches ["\n"]
 console.log(specialChars.match(/\r/)); // Matches ["\r"]
 
-// ######################  Groups & Lookaround
-// Capture group
-let group = "I have an apple.";
-console.log(group.match(/(apple)/)); // Matches ["apple", "apple"]
-
-// Backreference to group #1
-let backreference = "apple apple";
-console.log(backreference.match(/(apple)\s\1/)); // Matches ["apple apple"]
-
-// Non-capturing group
-let nonCapturing = "redapple";
-console.log(nonCapturing.match(/(?:red)apple/)); // Matches ["redapple"]
-
-// Positive lookahead
-let lookahead = "I have 100 dollars.";
-console.log(lookahead.match(/\d+(?= dollars)/)); // Matches ["100"]
-
-// Negative lookahead
-let negLookahead = "I have 100 euros.";
-console.log(negLookahead.match(/\d+(?! dollars)/)); // Matches ["100"]
-
 // ########################### Quantifiers & Alternation
-// 0 or more, 1 or more, 0 or 1
+// 0 or more, 1 or more, 0 or 1(plus non greedy or minimum)
 let quantifiers = "aa a aaa aaaa";
-console.log(quantifiers.match(/a*/g)); // Matches ["aa"," ","a"," ","aaa"," ","aaaa",""]
+console.log(quantifiers.match(/a*/g)); // Matches ["aa","","a","","aaa","","aaaa",""]
 console.log(quantifiers.match(/a+/g)); // Matches ["aa","a","aaa","aaaa"]
-console.log(quantifiers.match(/a?/g)); // Matches ["a","a","","a"," ","a","","a","a","","a","a","a","a","a",""]
+console.log(quantifiers.match(/a?/g)); // Matches ["a","a","","a","","a","","a","a","","a","a","a","a","a",""]
 
 // Exactly five, two or more
 let exact = "aaaaa aaaaaa";
@@ -93,7 +72,7 @@ console.log(exact.match(/a{2,}/g)); // Matches ["aaaaa","aaaaaa"]
 
 // Between one & three
 let range = "a aa aaa aaaa";
-console.log(range.match(/a{1,3}/g)); // Matches ["a","aa","aaa","aaa"]
+console.log(range.match(/a{1,3}/g)); // Matches ["a","aa","aaa","aaa", "a   "]
 
 // Match as few as possible
 let minimal = "aaaaaa";
@@ -103,3 +82,49 @@ console.log(minimal.match(/a{2,}?/g)); // Matches ["aa","aa","aa"]
 // Match ab or cd
 let alternation = "abc ab cd";
 console.log(alternation.match(/ab|cd/g)); // Matches ["ab","ab","cd"]
+
+// ######################  Groups & Lookaround
+// Capture group
+let text = "The quick brown fox jumps over the lazy dog.";
+let matchResult = text.match(/(quick) (brown) (fox)/);
+console.log(matchResult);
+
+let date1 = "2024-06-23";
+let dateMatch = date1.match(/(\d{4})-(\d{2})-(\d{2})/);
+console.log(dateMatch);
+// Output: ["2024-06-23", "2024", "06", "23"]
+// Output: [Exact match, capturing group 1, capturing group 2, capturing group 3]
+
+let date2 = "2024-06-23";
+let reformattedDate = date2.replace(/(\d{4})-(\d{2})-(\d{2})/, "$3/$2/$1");
+console.log(reformattedDate);
+// Output: "23/06/2024"
+
+// Backreference to group #1
+// Define a regex with multiple capture groups and backreferences
+const regex = /(foo)(bar)\2\1/;
+
+// Test strings
+const str1 = "foobarbarfoo";
+const str2 = "foobarfoo";
+
+// Using regex.test to check if the strings match the pattern
+console.log(regex.test(str1)); // true
+console.log(regex.test(str2)); // false
+console.log(regex.exec(str1));
+console.log(str1.match(regex));
+console.log(str2.match(regex));
+
+// Non-capturing group
+let nonCapturing = "redapple";
+console.log(nonCapturing.match(/(?:red)apple/)); // Matches ["redapple"]
+console.log(nonCapturing.match(/(red)apple/)); // Matches ["redapple"]
+
+// Positive lookahead
+let lookahead = "I have 100 dollars.";
+console.log(lookahead.match(/\d+(?= dollars)/)); // Matches ["100"]
+//  matches 100 followed by "space dollars" but does not include "space dollars"
+
+// Negative lookahead
+const strNegLook = "123abc456";
+console.log(strNegLook.match(/\d{3,}(?!abc)/));
