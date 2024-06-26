@@ -3,9 +3,10 @@
 // Any character except newline
 let anyChar = "Hello! How are you? \n I'm fine.";
 console.log(anyChar.match(/./g)); // Matches each character except newline
+console.log(anyChar.match(/\./g));
 
 // Word, digit, whitespace
-let wdws = "Hello123_ 456";
+let wdws = "Hello123_ 456?";
 console.log(wdws.match(/\w/g)); // Matches all word characters [H,e,l,l,o,1,2,3,_]
 console.log(wdws.match(/\d/g)); // Matches all digits [1,2,3,4,5,6]
 console.log(wdws.match(/\s/g)); // Matches all whitespace characters [" "]
@@ -50,7 +51,7 @@ console.log(star.match(/\*/g)); // Matches ["*"]
 let backslash = "Backslash\\";
 console.log(backslash);
 console.log(backslash.match(/\\/g)); // Matches ["\\"]
-console.log(backslash.match(/\\/g)[0]); // Matches ["\\"]
+console.log(backslash.match(/\\/g)[0]); // \
 
 // Tab, linefeed, carriage return
 let specialChars = "Tab\tLinefeed\nCarriage Return\r";
@@ -128,5 +129,6 @@ console.log(lookahead.match(/\d+(?= dollars)/)); // Matches ["100"]
 // Negative lookahead
 const strNegLook = "123abc456";
 console.log(strNegLook.match(/\d{3,}(?!abc)/));
+// matches digits if it is not followed by abc
 
 // regexr.com

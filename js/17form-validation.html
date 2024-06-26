@@ -113,7 +113,7 @@
 
         if (
           !(errorBit & 0b0010) &&
-          !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
+          !/^[\w-\.]+@(?:[\w]+\.)+[\w]{2,4}$/.test(email)
         ) {
           showError("email", "Email is Invalid");
           errorBit = errorBit | 0b0010;
