@@ -8,6 +8,9 @@
         this.name = name;
         this.age = age;
         this.isAlive = true;
+        this.revive = function () {
+          this.isAlive = true;
+        };
       }
       Person.prototype.kill = function () {
         this.isAlive = false;
@@ -16,6 +19,8 @@
       const perosn1 = new Person("Bidur", 24);
       console.log(perosn1.name, perosn1.isAlive);
       perosn1.kill();
+      console.log(perosn1.name, perosn1.isAlive);
+      perosn1.revive();
       console.log(perosn1.name, perosn1.isAlive);
 
       const person2 = {

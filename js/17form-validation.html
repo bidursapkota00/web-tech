@@ -8,11 +8,6 @@
       button {
         cursor: pointer;
       }
-      .error {
-        color: red;
-        font-size: 14px;
-        margin: 0;
-      }
       .input_container {
         position: relative;
         padding-bottom: 15px;
@@ -22,11 +17,22 @@
         position: absolute;
         bottom: 0;
         left: 0;
+        color: red;
+        font-size: 14px;
+        margin: 0;
+        display: none;
+      }
+      .error.show {
+        display: block;
       }
     </style>
   </head>
   <body>
-    <form action="/js/17form-validation.html" onsubmit="return validate();">
+    <form
+      id="form"
+      action="/js/17form-validation.html"
+      onsubmit="return validate();"
+    >
       <div class="input_container">
         <label for="name">Name: </label>
         <input type="text" id="name" name="name" placeholder="John Doe" />
@@ -58,7 +64,7 @@
       <div class="input_container">
         <label for="password">Password: </label>
         <input
-          type="password"
+          type="text"
           id="password"
           name="password"
           placeholder="********"
@@ -70,97 +76,74 @@
     </form>
 
     <script>
+      const nameInput = document.getElementById("name");
+      const usernameInput = document.getElementById("username");
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const form = document.getElementById("form");
+      const errorElements = {
+        name: document.getElementById("name_error"),
+        username: document.getElementById("username_error"),
+        email: document.getElementById("email_error"),
+        password: document.getElementById("password_error"),
+      };
+
+      const nameRegex = /^[a-zA-Z]+(?: [a-zA-Z]+)+$/;
+      const usernameRegex = /^[a-zA-Z][a-zA-Z0-9-]+$/;
+      const emailRegex = /^[\w-\.]+@(?:[\w]+\.)+[\w]{2,4}$/;
+      const passwordRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,20}$/;
+
       function validate() {
-        resetError();
+        resetErrors();
 
-        const name_tag = document.getElementById("name");
-        const username_tag = document.getElementById("username");
-        const email_tag = document.getElementById("email");
-        const password_tag = document.getElementById("password");
+        const name = nameInput.value.trim();
+        const username = usernameInput.value.trim();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
 
-        const name = name_tag.value.trim();
-        const username = username_tag.value.trim();
-        const email = email_tag.value.trim();
-        const password = password_tag.value.trim();
+        const errors = {};
 
-        let errorBit = 0b0000;
+        if (!name) errors.name = "Name is required!";
+        else if (!nameRegex.test(name)) errors.name = "Name is Invalid!";
 
-        if (!name) {
-          errorBit = errorBit | 0b1000;
-          showError("name", "Name is required!");
-        }
-        if (!username) {
-          errorBit = errorBit | 0b0100;
-          showError("username", "Username is required!");
-        }
-        if (!email) {
-          errorBit = errorBit | 0b0010;
-          showError("email", "Email is required");
-        }
-        if (!password) {
-          errorBit = errorBit | 0b0001;
-          showError("password", "Password is required");
-        }
+        if (!username) errors.username = "Username is required!";
+        else if (!usernameRegex.test(username))
+          errors.username = "Username is Invalid!";
 
-        if (!(errorBit & 0b1000) && !/^[a-zA-Z]+(?: [a-zA-Z]+)+$/.test(name)) {
-          showError("name", "Name is Invalid!");
-          errorBit = errorBit | 0b1000;
-        }
-        if (!(errorBit & 0b0100) && !/^[a-zA-Z][a-zA-Z0-9-]+$/.test(username)) {
-          showError("username", "Username is Invalid!");
-          errorBit = errorBit | 0b0100;
-        }
+        if (!email) errors.email = "Email is required!";
+        else if (!emailRegex.test(email)) errors.email = "Email is Invalid!";
 
-        if (
-          !(errorBit & 0b0010) &&
-          !/^[\w-\.]+@(?:[\w]+\.)+[\w]{2,4}$/.test(email)
-        ) {
-          showError("email", "Email is Invalid");
-          errorBit = errorBit | 0b0010;
-        }
-        if (
-          !(errorBit & 0b0001) &&
-          !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/.test(
-            password
-          )
-        ) {
-          showError("password", "Password is Invalid");
-          errorBit = errorBit | 0b0001;
-        }
+        if (!password) errors.password = "Password is required!";
+        else if (!passwordRegex.test(password))
+          errors.password = "Password is Invalid!";
 
-        if (errorBit) return false;
+        if (Object.keys(errors).length !== 0) {
+          showErrors(errors);
+          addOnInputEvent();
+          return false;
+        }
 
         return true;
       }
 
-      function showError(error_tag_name, message) {
-        switch (error_tag_name) {
-          case "name":
-            document.getElementById("name_error").textContent = message;
-            break;
+      function showErrors(errors) {
+        Object.keys(errors).forEach((key, _) => {
+          errorElements[key].textContent = errors[key];
+          errorElements[key].classList.add("show");
+        });
+      }
 
-          case "username":
-            document.getElementById("username_error").textContent = message;
-            break;
-
-          case "email":
-            document.getElementById("email_error").textContent = message;
-            break;
-
-          case "password":
-            document.getElementById("password_error").textContent = message;
-            break;
-
-          default:
-            console.log("Something went wrong!");
-            break;
+      function resetErrors() {
+        for (const errorElement of Object.values(errorElements)) {
+          errorElement.classList.remove("show");
         }
       }
 
-      function resetError() {
-        const errorTags = document.querySelectorAll(".error");
-        for (const errorTag of errorTags) {
-          errorTag.textContent = "";
+      function addOnInputEvent() {
+        const onInput = form.getAttribute("oninput");
+        if (!onInput) {
+          form.setAttribute("oninput", "validate();");
         }
       }
     </script>
