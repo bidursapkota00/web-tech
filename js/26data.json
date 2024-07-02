@@ -1,0 +1,28 @@
+{
+  "persons": [
+    {
+      "id": 1,
+      "name": "Bidur",
+      "age": 24,
+      "isAdmin": true,
+      "address": {
+        "city": "Kathmandu",
+        "country": "Nepal"
+      },
+      "hobbies": ["Table tennis", "IOT"],
+      "verified": null
+    },
+    {
+      "id": 2,
+      "name": "Bijay",
+      "price": 27,
+      "isAdmin": false,
+      "specs": {
+        "city": "Lalitpur",
+        "country": "Nepal"
+      },
+      "hobbies": ["Table tennis", "Series"],
+      "verified": "2024-2-2"
+    }
+  ]
+}
