@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <title>JQuery Animation</title>
+    <style>
+      .box {
+        background: #000;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+      }
+      button {
+        margin-bottom: 20px;
+      }
+      #box9 {
+        position: relative;
+        left: 250px;
+      }
+      #box3 {
+        transition: all 3s ease;
+      }
+      .animateBox3 {
+        transform: translateX(300px);
+        opacity: 0.5;
+        background: blue;
+      }
+      .animateBox4 {
+        animation: keyframesBox4 3s ease 1s infinite;
+      }
+      @keyframes keyframesBox4 {
+        0% {
+          transform: translateX(0px);
+        }
+        50% {
+          transform: translateX(200px);
+        }
+        100% {
+          transform: translateX(0px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box1" class="box"></div>
+
+    <div id="box2" class="box"></div>
+    <button>Toggle box visibility</button>
+
+    <div id="box3" class="box"></div>
+
+    <div id="box4" class="box"></div>
+
+    <div id="box9" class="box"></div>
+
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script>
+      $("#box1")
+        .slideUp(2000)
+        .slideDown(2000)
+        .delay(1000)
+        .fadeOut(2000)
+        .fadeIn(2000);
+
+      $("button").click(function () {
+        // $("#box2").toggle();
+        // $("#box2").fadeToggle();
+        $("#box2").slideToggle(2000);
+      });
+
+      $("#box9")
+        .animate(
+          {
+            left: "+=250px",
+            top: "150px",
+            opacity: 0.25,
+          },
+          2000
+        )
+        .delay(2000)
+        // .animate({ top: 0, opacity: 1 }, 2000, () => console.log("complete"));
+        .animate({ top: 0, opacity: 1 }, 2000, animateLoop);
+
+      function animateLoop() {
+        $("#box9")
+          .animate({ left: "-=250px" }, 2000)
+          .animate({ left: "+=250px" }, 2000, animateLoop);
+      }
+
+      $("#box3").toggleClass("animateBox3");
+      $("#box4").addClass("animateBox4");
+    </script>
+  </body>
+</html>
