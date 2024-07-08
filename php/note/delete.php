@@ -1,12 +1,18 @@
 <?php
-// Include the database connection file
 require_once("dbConnection.php");
 
-// Get id parameter value from URL
+if (!isset($_GET['id'])) {
+    die("Error: No id parameter provided.");
+}
 $id = $_GET['id'];
+$result = mysqli_query($conn, "DELETE FROM notes WHERE id = $id");
+if (!$result) {
+    die("Error: " . mysqli_error($conn));
+}
 
-// Delete row from the database table
-$result = mysqli_query($mysqli, "DELETE FROM notes WHERE id = $id");
+if (mysqli_affected_rows($conn) == 0) {
+    die("Error: No record found with id $id.");
+}
 
-// Redirect to the main display page (index.php in our case)
 header("Location:index.php");
+exit();

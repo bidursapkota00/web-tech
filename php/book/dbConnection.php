@@ -1,6 +1,6 @@
 <?php
 $databaseHost = 'localhost';
-$databaseName = 'notes_db';
+$databaseName = 'book_search';
 $databaseUsername = 'root';
 $databasePassword = '';
 

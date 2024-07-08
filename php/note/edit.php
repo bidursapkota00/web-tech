@@ -2,18 +2,18 @@
 // Include the database connection file
 require_once("dbConnection.php");
 
-// Get id from URL parameter
 $id = $_GET['id'];
 
-// Select data associated with this particular id
-$result = mysqli_query($mysqli, "SELECT * FROM notes WHERE id = $id");
-
-// Fetch the next row of a result set as an associative array
+$result = mysqli_query($conn, "SELECT * FROM notes WHERE id = $id");
+if (!$result) {
+	die("Error: " . mysqli_error($conn));
+}
+if (mysqli_num_rows($result) == 0) {
+	die("Error: No record found with id $id.");
+}
 $resultData = mysqli_fetch_assoc($result);
-
 $title = $resultData['title'];
 $description = $resultData['description'];
-echo $description;
 ?>
 
 <html>

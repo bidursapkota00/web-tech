@@ -1,6 +1,6 @@
 <?php
 session_start();
-session_regenerate_id();
+session_regenerate_id(true);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -10,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["username"] = $username;
         setcookie("username", $username, time() + (86400 * 30), "/");
         header("Location: admin-dashboard.php");
+        exit();
     } else {
         echo "Invalid credentials.";
     }

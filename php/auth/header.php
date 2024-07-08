@@ -1,5 +1,6 @@
 <nav style="display: flex; justify-content: space-around;">
-    <a href="/login.php">Login</a>
-    <a href="/register.php">Register</a>
-    <a href="/logoutAction.php">Logout</a>
+    <a href="/w/php/auth/login.php">Login</a>
+    <a href="/w/php/auth/register.php">Register</a>
+    <a href="/w/php/auth/admin-dashboard.php">Admin Dashboard</a>
+    <a href="/w/php/auth/logoutAction.php">Logout</a>
 </nav>

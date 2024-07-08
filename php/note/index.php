@@ -1,9 +1,9 @@
 <?php
 // Include the database connection file
-require_once("dbConnection.php");
+require_once "dbConnection.php";
 
 // Fetch data in descending order (lastest entry first)
-$result = mysqli_query($mysqli, "SELECT * FROM notes ORDER BY id DESC");
+$result = mysqli_query($conn, "SELECT * FROM notes ORDER BY id DESC");
 ?>
 
 <html>
@@ -32,17 +32,21 @@ $result = mysqli_query($mysqli, "SELECT * FROM notes ORDER BY id DESC");
 			<th>Action</th>
 		</tr>
 		<?php
-		// Fetch the next row of a result set as an associative array
-		while ($res = mysqli_fetch_assoc($result)) {
-			echo "<tr>";
-			echo "<td>" . $res['title'] . "</td>";
-			echo "<td>" . $res['description'] . "</td>";
-			echo "<td>";
-			echo "<a href='edit.php?id=" . $res['id'] . "'>Edit</a>";
-			echo " | ";
-			echo "<a href='delete.php?id=" . $res['id'] . "' onClick='return del();'>Delete</a>";
-			echo "</td>";
+		if (mysqli_num_rows($result) > 0) {
+			while ($res = mysqli_fetch_assoc($result)) {
+				echo "<tr>";
+				echo "<td>" . $res['title'] . "</td>";
+				echo "<td>" . $res['description'] . "</td>";
+				echo "<td>";
+				echo "<a href='edit.php?id=" . $res['id'] . "'>Edit</a>";
+				echo " | ";
+				echo "<a href='delete.php?id=" . $res['id'] . "' onClick='return del();'>Delete</a>";
+				echo "</td>";
+			}
+		} else {
+			echo "<p>No results Found</p>";
 		}
+		mysqli_close($conn);
 		?>
 	</table>
 	<script>
