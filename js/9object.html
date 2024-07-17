@@ -35,6 +35,19 @@
       const person2 = new Person("Ram", 50);
       person2.isAlive = true;
       console.log(person2);
+
+      const person3 = new Object({
+        name: "aalu",
+        surname: "pidalu",
+        age: 1,
+      });
+
+      console.log(person3.age);
+      person3.age = 2;
+      person3.address = "karkalo";
+      person3["root"] = "soil";
+      console.log(person3.age);
+      console.log(person3);
     </script>
   </body>
 </html>
