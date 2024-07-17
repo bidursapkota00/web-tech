@@ -24,7 +24,7 @@ $d1 = true and false;
 $e1 = false or true;
 var_dump($a1, $b1, $c1, $d1, $e1);
 
-if (true and true && true or false) {   // && > = > and > or 
+if (true and true && true or false) {   // && > || > = > and > or 
     echo "hello or gate\n";
 } else {
     echo "hello not gate\n";
@@ -44,6 +44,9 @@ if ($myObject instanceof MyClass) {
     echo 'No, $myObject is not an instance of MyClass.';
 }
 echo "\n";
+
+// $a = 3;
+// echo gettype($a);
 
 $file = @fopen("php\\examples.txt", "r");
 
@@ -67,12 +70,15 @@ $arr3 = $arr1 + $arr2;
 var_dump($arr3);
 
 // == Equality
+// Returns true if $x and $y have the same key/value pairs
 $array3 = [1, 2, 3];
 $array4 = [1, 2, 3];
 $resultEqual = ($array3 == $array4);
 var_dump($resultEqual); // Output: bool(true)
 
 // === Identity
+// Returns true if $x and $y have the same key/value pairs in the same order
+//  and of the same types
 $resultIdentical = ($array3 === $array4);
 var_dump($resultIdentical); // Output: bool(true)
 

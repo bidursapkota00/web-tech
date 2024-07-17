@@ -29,6 +29,7 @@ echo $families['Griffin'][0] . "\n"; // Outputs: Peter
 echo $families['Brown'][2] . "\n"; // Outputs: Junior
 
 $numbers = array(1, 2, 3, 4, 5);
+// $numbers = [1, 2, 3, 4, 5];
 
 // Count the number of elements in the array
 echo count($numbers) . "\n"; // Outputs: 5
