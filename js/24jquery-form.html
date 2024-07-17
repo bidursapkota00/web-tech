@@ -30,7 +30,7 @@
       <button type="submit">Submit</button>
     </form>
 
-    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery-3.7.1.min.js"></script>
     <script>
       // let value = $("#inputId").val();
       function validateForm() {
@@ -39,7 +39,11 @@
           if ($(this).val() === "") {
             isValid = false;
             $(this).css({ border: "1px solid red" });
-            $(this).parent().children("p").css("display", "block");
+            $(this)
+              .parent()
+              .children("p")
+              .css("display", "block")
+              .text("This field is required");
           } else {
             $(this).parent().children("p").css("display", "none");
             $(this).css({ border: "1px solid rgb(118,118,118)" });
