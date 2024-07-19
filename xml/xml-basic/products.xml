@@ -7,7 +7,7 @@
     </product>
     <product>
         <name>Product Name 2</name>
-        <price>19.99</price>
+        <pric>19.99</pric>
         <description>A brief description of the product.</description>
     </product>
 </products>

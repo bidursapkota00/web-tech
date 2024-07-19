@@ -60,12 +60,9 @@
             }
           }
         } catch (error) {
-          console.error(error);
-          document.body.innerHTML += `<p style="color: red;">\
-            Error fetching product.\
-            <br/>Status code: ${xhr.status}<br/>Server Error \
-            Text: ${xhr.responseText}<br/>Client Error \
-            Text: ${error}</p>`;
+          console.log(error);
+          document.body.innerHTML += `<p style="color: red;">Error fetching product.<br/></p>`;
+          document.body.innerHTML += `<p style="color: red;">Client Error: ${error}</p>`;
         }
       }
     </script>
