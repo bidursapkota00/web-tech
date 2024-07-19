@@ -1,16 +1,10 @@
-<html>
-
-<head>
-	<title>Add Notes</title>
-</head>
-
-<body>
 	<?php
 	require_once("dbConnection.php");
 	// if (isset($_POST['submit'])) {
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		// $title = mysqli_real_escape_string($conn, $_POST['title']);
-		$title = $_POST['title'];
+		$title = htmlspecialchars($_POST['title'], ENT_QUOTES, 'UTF-8');
+		// $title = $_POST['title'];
 		$description = $_POST['description'];
 
 		if (empty($title) || empty($description)) {
@@ -38,6 +32,3 @@
 		}
 	}
 	?>
-</body>
-
-</html>

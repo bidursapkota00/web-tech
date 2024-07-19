@@ -6,7 +6,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $pass = $_POST['password'];
 
-    $sql = "SELECT `id`, `password` FROM `users` WHERE `username` = '$username'";
+    // $sql = "SELECT `id`, `password` FROM `users` WHERE `username` = '$username'";
+    $sql = "SELECT * FROM `users` WHERE `username` = '$username'";
     $result = mysqli_query($conn, $sql);
     if (!$result) {
         die("Error: " . mysqli_error($conn));
@@ -16,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $user = mysqli_fetch_assoc($result);
+    var_dump($user);
     $hash = $user['password'];
 
     $res = password_verify($pass, $hash);
@@ -28,6 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Invalid username or password";
         echo $pass;
-        echo $user['password'];
+        echo $hash;
     }
 }
