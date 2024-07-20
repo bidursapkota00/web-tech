@@ -3,3 +3,5 @@
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT price (#PCDATA)>
 <!ELEMENT description (#PCDATA)>
+<!ATTLIST product stock CDATA #REQUIRED>
+<!ATTLIST product category (ELECTRONICS | COSMETICS) "ELECTRONICS">

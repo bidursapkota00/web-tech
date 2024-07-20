@@ -38,7 +38,7 @@
       function fetchProduct() {
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = () => onFetch(xhr);
-        xhr.open("GET", "get-product.php", true);
+        xhr.open("GET", "products.xml", true);
         xhr.send();
       }
 
@@ -62,7 +62,6 @@
         } catch (error) {
           console.log(error);
           document.body.innerHTML += `<p style="color: red;">Error fetching product.<br/></p>`;
-          document.body.innerHTML += `<p style="color: red;">Server Error: ${xhr.responseText}<br/></p>`;
           document.body.innerHTML += `<p style="color: red;">Client Error: ${error}</p>`;
         }
       }

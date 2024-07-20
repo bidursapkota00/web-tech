@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE products SYSTEM "products.dtd">
 <products>
     <product>
         <name>Product Name 1</name>
