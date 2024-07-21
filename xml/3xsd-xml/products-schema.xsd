@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
+  <xs:simpleType name="categoryType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Electronics"/>
+      <xs:enumeration value="Cosmetics"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:element name="products">
     <xs:complexType>
       <xs:sequence>
@@ -11,6 +18,8 @@
               <xs:element name="price" type="xs:decimal"/>
               <xs:element name="description" type="xs:string"/>
             </xs:sequence>
+            <xs:attribute name="stock" type="xs:int" use="required"/>
+            <xs:attribute name="category" type="categoryType" use="required"/>
           </xs:complexType>
         </xs:element>
       </xs:sequence>

@@ -26,6 +26,7 @@
         <th>Name</th>
         <th>Price</th>
         <th>Description</th>
+        <th>Stock</th>
       </tr>
     </table>
 
@@ -46,6 +47,7 @@
         try {
           if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
+              console.log(xhr.responseText);
               let xmlResponse = xhr.responseXML;
               let products = xmlResponse.getElementsByTagName("product");
               for (product of products) {
@@ -55,6 +57,7 @@
                 <td>${
                   product.getElementsByTagName("description")[0].textContent
                 }</td>
+                <td>${product.getAttribute("stock")}</td>
               </tr>`;
               }
             }
