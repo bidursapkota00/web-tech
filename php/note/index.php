@@ -40,7 +40,7 @@ $result = mysqli_query($conn, "SELECT * FROM notes ORDER BY id DESC");
 				echo "<td>";
 				echo "<a href='edit.php?id=" . $res['id'] . "'>Edit</a>";
 				echo " | ";
-				echo "<a href='delete.php?id=" . $res['id'] . "' onClick='return del();'>Delete</a>";
+				echo "<a href='delete.php?id=" . $res['id'] . "' onclick='return del();'>Delete</a>";
 				echo "</td>";
 			}
 		} else {
