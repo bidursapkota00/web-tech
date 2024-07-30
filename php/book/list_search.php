@@ -25,11 +25,10 @@ $result = mysqli_query($conn, $sql);
             </tr>";
         while ($res = mysqli_fetch_assoc($result)) {
             echo "<tr>
-                <td>" . $row["id"] . "</td>
-                <td>" . $row["search_type"] . "</td>
-                <td>" . $row["keyword"] . "</td>
-                <td>" . $row["download"] . "</td>
-                <td>" . $row["timestamp"] . "</td>
+                <td>" . $res["id"] . "</td>
+                <td>" . $res["search_type"] . "</td>
+                <td>" . $res["keyword"] . "</td>
+                <td>" . $res["download"] . "</td>
               </tr>";
         }
         echo "</table>";
